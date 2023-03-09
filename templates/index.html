@@ -1,5 +1,49 @@
 {% extends "base.html" %}
 
 {% block content %}
- <h1>hello!</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner col-md-4">
+                    {% for review in review_list %}
+                    <div class="carousel-item active card col-md-12 mt-5" data-bs-interval="4000"
+                        style="height: 24rem;">
+                        {% if "placeholder" in review.movie_poster.url %}
+                        <div class="col-md-4">
+                            <img src="https://res.cloudinary.com/dqj8alsys/image/upload/v1678289064/defaultimage_nrxzoc.jpg"
+                                class="d-block w-100 col-md-6 img-fluid " alt="image of a cat"
+                                aria-label="image of a cat" style="max-height: 12rem;">
+                        </div>
+                        {% else %}
+                        <div class="col-md-4">
+                            <img src="{{ review.movie_poster.url }}" alt="an image of {{ review.title }} poster"
+                                class="d-block w-100 col-md-6 img-fluid" alt="..." style="max-height: 12rem;">
+                        </div>
+                        {% endif %}
+
+                        <div class="card-body" style="height: 12rem">
+                            <h3 class="text-center">{{ review.title }}</h5>
+                                <p class="text-center">{{ review.excerpt }}</p>
+                        </div>
+                    </div>
+
+
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
