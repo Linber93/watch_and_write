@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container justify-content-center background-directory w-auto">
+<div class="container justify-content-center background-directory w-auto g-0">
     <div class="row">
         {% for review in review_list %}
         <div class="card shadow-lg col-sm-10 col-lg-3 m-auto mt-5 mb-5 vh-75">
@@ -28,7 +28,7 @@
 
             {% endfor %}
         </div>
-        <ul class="pagination justify-content-center mt-5 pb-5">
+        <ul class="pagination justify-content-center mt-5 pb-5 mb-0">
             {% if page_obj.has_previous %}
                 <li class="page-item m-1">
                     <a href="#" class="page-link directory-pag-a">&laquo; first</a>
