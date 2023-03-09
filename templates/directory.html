@@ -1,20 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container justify-content-center">
+<div class="container justify-content-center background-directory w-auto">
     <div class="row">
         {% for review in review_list %}
-        <div class="card shadow-lg col-md-3 m-auto mt-5 vh-75">
+        <div class="card shadow-lg col-sm-10 col-lg-3 m-auto mt-5 mb-5 vh-75">
             {% if "placeholder" in review.movie_poster.url %}
+            <div class="position-relative" style="height: 350px;">
             <img src="https://res.cloudinary.com/dqj8alsys/image/upload/v1678289064/defaultimage_nrxzoc.jpg"
-                class="d-block w-100 mh-100 card-img-top img-fluid" alt="Default Image" aria-label="Default Image" >
+                class="d-block w-100 mh-100 card-img-top" alt="Default Image" aria-label="Default Image" >
+            </div>
             {% else %}
+            <div style="height: 350px;">
             <img src="{{ review.movie_poster.url }}" alt="An image of {{ review.title }} movie poster "
-                class="d-block mh-100 card-img-top img-fluid " alt="...">
-            {% endif %} <div class="card-body">
+                class="d-block mh-100 card-img-top" alt="...">
+            </div>
+            {% endif %} <div class="card-body" style="height: 20rem;">
                 <h5 class="card-title">{{ review.title }}</h5>
                 <p class="card-text">{{ review.excerpt }}</p>
-                <a href="#" class="card-text">More information</a>
+                <a href="#" class="card-text btn btn-dark">More information</a>
             </div>
         </div>
         {% if forloop.counter|divisibleby:3 %}
@@ -24,51 +28,53 @@
 
             {% endfor %}
         </div>
+        <ul class="pagination justify-content-center mt-5 pb-5">
+            {% if page_obj.has_previous %}
+                <li class="page-item m-1">
+                    <a href="#" class="page-link directory-pag-a">&laquo; first</a>
+                </li>
+                <li class="page-item m-1">
+                    <a href="#" class="page-link directory-pag-a">previous</a>
+                </li>
+            {% else %}
+                <li class="page-item m-1">
+                    <a href="#" class="page-link directory-pag-a">&laquo; first</a>
+                </li>
+                <li class="page-item m-1">
+                    <a href="#" class="page-link directory-pag-a">previous</a>
+                </li>
+                
+            {% endif %}
+        
+            {% for i in page_obj.paginator.page_range %}
+                {% if page_obj.number == i %}
+                    <li class="page-item m-1 active"><a href="#" class="page-link directory-pag-a">{{ i }}<span class="sr-only">(current)</span></a></li>
+                {% else %}
+                    <li class="page-item m-1"><a class="page-link directory-pag-a" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+        
+            {% if page_obj.has_next %}
+                <li class="page-item m-1">
+                    <a href="?page={{ page_obj.next_page_number }}" class="page-link directory-pag-a">next</a>
+                </li>
+                <li class="page-item m-1">
+                    <a href="?page={{ page_obj.paginator.num_pages }}" class="page-link directory-pag-a">last &raquo;</a>
+                </li>
+        
+            {% else %}
+                <li class="page-item m-1">
+                    <a href="#" class="page-link directory-pag-a">next</a>
+                </li>
+                <li class="page-item m-1">
+                    <a href="#" class="page-link directory-pag-a">last &raquo;</a>
+                </li>
+                
+            {% endif %}
+        </ul>
+        
 </div>
 
-<ul class="pagination justify-content-center mt-5">
-    {% if page_obj.has_previous %}
-        <li class="page-item m-1">
-            <a href="#" class="page-link directory-pag-a">&laquo; first</a>
-        </li>
-        <li class="page-item m-1">
-            <a href="#" class="page-link directory-pag-a">previous</a>
-        </li>
-    {% else %}
-        <li class="page-item m-1">
-            <a href="#" class="page-link directory-pag-a">&laquo; first</a>
-        </li>
-        <li class="page-item m-1">
-            <a href="#" class="page-link directory-pag-a">previous</a>
-        </li>
-        
-    {% endif %}
 
-    {% for i in page_obj.paginator.page_range %}
-        {% if page_obj.number == i %}
-            <li class="page-item m-1 active"><a href="#" class="page-link directory-pag-a">{{ i }}<span class="sr-only">(current)</span></a></li>
-        {% else %}
-            <li class="page-item m-1"><a class="page-link directory-pag-a" href="?page={{ i }}">{{ i }}</a></li>
-        {% endif %}
-    {% endfor %}
-
-    {% if page_obj.has_next %}
-        <li class="page-item m-1">
-            <a href="?page={{ page_obj.next_page_number }}" class="page-link directory-pag-a">next</a>
-        </li>
-        <li class="page-item m-1">
-            <a href="?page={{ page_obj.paginator.num_pages }}" class="page-link directory-pag-a">last &raquo;</a>
-        </li>
-
-    {% else %}
-        <li class="page-item m-1">
-            <a href="#" class="page-link directory-pag-a">next</a>
-        </li>
-        <li class="page-item m-1">
-            <a href="#" class="page-link directory-pag-a">last &raquo;</a>
-        </li>
-        
-    {% endif %}
-</ul>
 
 {% endblock %}

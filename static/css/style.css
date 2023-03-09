@@ -1,0 +1,15 @@
+.container {
+    margin: 0;
+}
+
+
+.background-directory {
+    max-width: 100%;
+    height: auto;
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(https://res.cloudinary.com/dqj8alsys/image/upload/v1678368411/pexels-nathan-engel-436413_y5ivww.jpg) center center / cover no-repeat;
+}
+
+.row{
+    width: 90%;
+    margin: 0 auto;
+}
