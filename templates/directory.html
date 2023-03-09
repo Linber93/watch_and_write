@@ -1,21 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
-    <div class="row mt-5 card-container card-container-top">
+<div class="container justify-content-center">
+    <div class="row">
         {% for review in review_list %}
-        <div class="card shadow-lg">
+        <div class="card shadow-lg col-md-3 m-auto mt-5 vh-75">
             {% if "placeholder" in review.movie_poster.url %}
             <img src="https://res.cloudinary.com/dqj8alsys/image/upload/v1678289064/defaultimage_nrxzoc.jpg"
-                class="d-block w-100 card-img-top index-image" alt="Default Image" aria-label="Default Image">
+                class="d-block w-100 mh-100 card-img-top img-fluid" alt="Default Image" aria-label="Default Image" >
             {% else %}
-            <img src="{{ review.movie_poster.url }}" alt="an image of {{ review.title }}s movie poster "
-                class="d-block w-100 card-img-top index-image" alt="..." style="height: 170px;">
+            <img src="{{ review.movie_poster.url }}" alt="An image of {{ review.title }} movie poster "
+                class="d-block mh-100 card-img-top img-fluid " alt="...">
             {% endif %} <div class="card-body">
                 <h5 class="card-title">{{ review.title }}</h5>
-                <p class="card-text">bu</p>
+                <p class="card-text">{{ review.excerpt }}</p>
                 <a href="#" class="card-text">More information</a>
-                <a href="#" class="" target="_blank">blä</a>
             </div>
         </div>
         {% if forloop.counter|divisibleby:3 %}
