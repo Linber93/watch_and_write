@@ -11,7 +11,7 @@ class ReviewList(generic.ListView):
     model = Review
     template_name = 'directory.html'
     paginate_by = 6
-    queryset = Review.objects.filter(status=1).order_by('-created_on')
+    queryset = Review.objects.filter(status=1).filter(review_approved=True).order_by('-created_on')
 
 
 class LandingPage(generic.ListView):
@@ -21,7 +21,7 @@ class LandingPage(generic.ListView):
     model = Review
     template_name = 'index.html'
     paginate_by = 3
-    queryset = Review.objects.filter(status=1).order_by('created_on')
+    queryset = Review.objects.filter(status=1).filter(review_approved=True).order_by('created_on')
 
 
 class Review_Single(View):
