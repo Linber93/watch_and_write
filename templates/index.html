@@ -7,7 +7,7 @@
             <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner col-md-4">
                     {% for review in review_list %}
-                    <div class="carousel-item active card col-md-12 mt-5" data-bs-interval="4000"
+                    <div class="carousel-item card col-md-12 mt-5" data-bs-interval="4000"
                         style="height: 24rem;">
                         {% if "placeholder" in review.movie_poster.url %}
                         <div class="col-md-4 image-container">
@@ -50,5 +50,10 @@
     </div>
     <div class="container col-12 bg-light-subtle d-inline-flex about-field mt-5 justify-content-center">deaf</div>
 </div>
+<script>
+    let firstItem = document.querySelector('.carousel-item');
+
+    firstItem.classList.add('active');
+</script>
 
 {% endblock %}
