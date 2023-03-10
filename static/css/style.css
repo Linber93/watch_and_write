@@ -51,7 +51,19 @@ body {
 }
 
 
+/* review cards */
 
+
+.image-container {
+    position: relative;
+}
+
+.image-flash {
+    position: absolute;
+    top: 5%;
+    min-width: 30%;
+    background-color: rgba(218, 165, 32, 0.819);
+}
 
 
 
