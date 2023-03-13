@@ -23,7 +23,7 @@ class LandingPage(generic.ListView):
     model = Review
     template_name = 'index.html'
     paginate_by = 3
-    queryset = Review.objects.filter(status=1).filter(review_approved=True).order_by('created_on')
+    queryset = Review.objects.filter(review_approved=True).order_by('created_on')
 
 
 class Review_Single(View):
@@ -34,7 +34,7 @@ class Review_Single(View):
         """
         Get method for retrieving a particular record
         """
-        queryset = Review.objects.filter(status=1)
+        queryset = Review.objects
         reviews = get_object_or_404(queryset, slug=slug)
         comments = reviews.comments.filter(comment_approved=True).order_by("-created_on")
         liked = False
