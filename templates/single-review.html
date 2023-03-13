@@ -19,11 +19,43 @@
                 <p>{{ reviews.plot }}</p>
                 <h6>Opinion</h6>
                 <p>{{ reviews.opinion}}</p>
+                <h6>Rating</h6>
+                {% if reviews.rating == 1 %}
+                    <div>
+                        <strong>Disliked</strong> | Boring | Average | Decent | Great
+                    </div>
+                {% elif reviews.rating == 2 %}
+                    <div>
+                        Disliked | <strong>Boring</strong> | Average | Decent | Great
+                    </div>
+                {% elif reviews.rating == 3 %}
+                    <div>
+                        <p>Disliked | Boring | <strong>Average</strong> | Decent | Great</p>
+                    </div>
+                {% elif review.rating == 4 %}
+                    <div>
+                        <p>Disliked | Boring | Average | <strong>Decent</strong> | Great</p>
+                    </div>
+                {% else%}
+                <div>
+                    <p>Disliked | Boring | Average | Decent | <strong>Great</strong></p>
+                </div>
+                {% endif%}
             </div>
         </div>
         <div class="col-md-6 mt-3">
             <div class="card">
-                <img src="{{ reviews.movie_poster.url }}" alt="an image of {{ reviews.title }} poster">
+            {% if "placeholder" in reviews.movie_poster.url %}
+                <div class="image-container" style="height: 350px;">
+                    <img src="https://res.cloudinary.com/dqj8alsys/image/upload/v1678289064/defaultimage_nrxzoc.jpg"
+                        class="d-block w-100 mh-100 card-img-top" alt="Default Image" aria-label="Default Image">
+                </div>
+            {% else %}
+                <div style="height: 350px;" class="image-container">
+                    <img src="{{ reviews.movie_poster.url }}" alt="An image of {{ review.title }} movie poster "
+                        class="d-block mh-100 card-img-top" alt="...">
+                </div>
+            {% endif %}
             </div>
         </div>
     </div>
@@ -38,8 +70,7 @@
 
         <div class="row d-flex justify-content-between">
             <div class="col-md-6 mb-4  mt-3 border-0">
-                    <div class="card-body border-0">
-                        <!-- For later -->
+                    <div class="card card-body border-0">
                         {% if commented %}
                         <div class="alert alert-success" role="alert">
                             Your comment is awaiting approval
