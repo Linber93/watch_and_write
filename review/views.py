@@ -2,6 +2,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.edit import FormView
 from django.views import generic, View
+from django.utils.text import slugify
+from django.urls import reverse, reverse_lazy
 from .models import Review
 from .forms import CommentForm, ReviewForm
 
@@ -119,3 +121,76 @@ class CreateReview(generic.CreateView):
             }
 
         return render(request, self.template_name, context)
+
+
+class EditReview(generic.UpdateView):
+    """
+    View to Edit a review
+    """
+    model = Review
+    template_name = 'edit-review.html'
+    form_class = ReviewForm
+
+    def get(self, request, *args, **kwargs):
+        """
+        Retrieves the review that is being updated
+        """
+        self.object = self.get_object()
+        return super().get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        """
+        Handles resubmission of the edited review,
+        also sets review to being not approved
+        """
+        self.object = self.get_object()
+        user_update_form = self.get_form()
+        if user_update_form.is_valid():
+            review = user_update_form.save(commit=False)
+            review.email = request.user.email
+            review.author = request.user
+            review.slug = slugify(review.title)
+            review.review_approved = False
+            return self.form_valid(user_update_form)
+        else:
+            return self.form_invalid(user_update_form)
+
+    def form_valid(self, user_update_form):
+        """
+        Saves the updated review to the database
+        Then renders the update_review page with a custom context
+        The context is used to display a success message
+        """
+        self.object = user_update_form.save()
+        template_name = self.template_name
+        context = {
+            "update_review_form": ReviewForm(),
+            "updated": True
+        }
+        return render(self.request, template_name, context)
+
+    def form_invalid(self, user_update_form):
+        """
+        Handles invalid forms, such as when alcohol content is <0
+        or when aroma, appearance, taste and aftertaste are <1 or >10
+        """
+        template_name = self.template_name
+        context = {
+            "update_review_form": user_update_form,
+            "updated": False,
+            "failure": True
+        }
+        return render(self.request, template_name, context)
+
+
+class DeleteReview(generic.DeleteView):
+    """
+    The view used for deleting a review on the front-end
+    Does not use a get or post method
+    The generic DeleteView handles all deletion functionality
+    Upon success, redirects to the landing page
+    """
+    model = Review
+    template_name = 'delete-review.html'
+    success_url = reverse_lazy('home')
+
