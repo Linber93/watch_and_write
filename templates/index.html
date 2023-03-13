@@ -12,8 +12,8 @@
                         {% if "placeholder" in review.movie_poster.url %}
                         <div class="col-md-4 image-container">
                             <img src="https://res.cloudinary.com/dqj8alsys/image/upload/v1678289064/defaultimage_nrxzoc.jpg"
-                                class="d-block w-100 col-md-6 img-fluid " alt="image of a cat"
-                                aria-label="image of a cat" style="max-height: 12rem;">
+                                class="d-block w-100 col-md-6 img-fluid " alt="Default image"
+                                aria-label="Default image" style="max-height: 12rem;">
                             <div class="image-flash">
                                 <p class="author">Author: {{ review.author }}</p>
                             </div>
@@ -23,7 +23,7 @@
                             <img src="{{ review.movie_poster.url }}" alt="an image of {{ review.title }} poster"
                                 class="d-block w-100 col-md-6 img-fluid" alt="..." style="max-height: 12rem;">
                             <div class="image-flash">
-                                <p class="author">Author: {{ post.author }}</p>
+                                <p class="author">Author: {{ review.author }}</p>
                             </div>
                         </div>
                         {% endif %}
