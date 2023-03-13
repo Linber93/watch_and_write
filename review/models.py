@@ -12,7 +12,7 @@ class Review(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="review_post")
     updated_on = models.DateTimeField(auto_now=True)
     created_on = models.DateTimeField(auto_now=True)
-    producer = models.CharField(max_length=100)
+    director = models.CharField(max_length=100)
     actors = models.CharField(max_length=300)
     released_on = models.DateTimeField()
     excerpt = models.TextField(blank=True)

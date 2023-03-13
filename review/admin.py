@@ -8,8 +8,8 @@ class ReviewAdmin(SummernoteModelAdmin):
 
     prepopulated_fields = {'slug': ('title',)}
     list_filter = ('status', 'created_on')
-    list_display = ('title', 'producer', 'status', 'rating', 'created_on', 'review_approved')
-    search_fields = ['title', 'producer']
+    list_display = ('title', 'director', 'status', 'rating', 'created_on', 'review_approved')
+    search_fields = ['title', 'director']
     summernote_fields = ('opinion', 'conclusion')
     actions = ['approve_reviews']
 
