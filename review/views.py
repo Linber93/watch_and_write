@@ -92,29 +92,30 @@ class Review_Single(View):
 
 class CreateReview(generic.CreateView):
     """
-    landing page view
+    View to Create a review
     """
     model = Review
     form_class = ReviewForm
     template_name = 'create-review.html'
 
-    def post(self, request, slug, *args, **kwargs):
-
-        template_name = 'add_review.html'
-
+    def post(self, request, *args, **kwargs):
         review_form = ReviewForm(data=request.POST)
         if review_form.is_valid():
-            review_form.instance.email = request.user.email
-            review_form.instance.name = request.user.username
             review = review_form.save(commit=False)
-            review.reviews = reviews
-            review.review_id = reviews.id
+            review.email = request.user.email
+            review.author = request.user
+            review.slug = review.title
             review.save()
-        else:
-            review_form = ReviewForm()
 
-        return render(
-            request,
-            "create-review.html", {
-                "Create-review": ReviewForm()
-            })
+            context = {
+                "review_form": review_form,
+                "reviewed": True,
+            }
+        else:
+            context = {
+                "review_form": review_form,
+                "reviewed": False,
+                "failure": True,
+            }
+
+        return render(request, self.template_name, context)
