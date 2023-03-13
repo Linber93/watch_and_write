@@ -1,0 +1,63 @@
+{% extends 'base.html'%}
+
+{% block content%}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-inner">
+                        {% if user.is_authenticated %}
+                            {% if user.id == review.author.id %}
+                                <h3>
+                                    Delete your review of {{ review.title }}?
+                                </h3>
+                                <p>
+                                    Be warned that this action is irreversible. If you are not happy with your review, you can <a href="{% url 'edit_review' review.slug %}">edit it</a> instead 
+                                </p>
+                                <p>
+                                    If you want to proceed, click the button below and confirm. You will then be redirected back to the home page
+                                </p>
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#delete"  class="btn btn-signup btn-lg">Delete review</button>
+                            {% else %}
+                                <p>
+                                    You are not the author of this post, so you may not delete it. Click <a href="{% url 'home' %}">here</a> to go back to the home page
+                                </p>
+                            {% endif %}
+                        {% else %}
+                            <div class="card-text">
+                                <p>You are signed out. Please <a href="{% url 'account_login' %}">sign in</a> to delete your review</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" id="delete">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm deletion?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Click the button below to confirm deletion of your review</p>
+                <p>WARNING: This action is irreversible!</p>
+                <p>After your review is deleted, you will be redirected back to the landing page</p>
+            </div>
+            <div class="modal-footer">
+                <form method="POST" class="mt-2">
+                    {% csrf_token %}
+                    <button type="button" class="btn btn-signup btn-lg" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-signup btn-lg">Delete Review</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
