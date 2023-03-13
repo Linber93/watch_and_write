@@ -1,7 +1,9 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
+from django.views.generic.edit import FormView
 from django.views import generic, View
 from .models import Review
-from .forms import CommentForm
+from .forms import CommentForm, ReviewForm
 
 
 class ReviewList(generic.ListView):
@@ -86,3 +88,33 @@ class Review_Single(View):
                 "liked": liked
             },
         )
+
+
+class CreateReview(generic.CreateView):
+    """
+    landing page view
+    """
+    model = Review
+    form_class = ReviewForm
+    template_name = 'create-review.html'
+
+    def post(self, request, slug, *args, **kwargs):
+
+        template_name = 'add_review.html'
+
+        review_form = ReviewForm(data=request.POST)
+        if review_form.is_valid():
+            review_form.instance.email = request.user.email
+            review_form.instance.name = request.user.username
+            review = review_form.save(commit=False)
+            review.reviews = reviews
+            review.review_id = reviews.id
+            review.save()
+        else:
+            review_form = ReviewForm()
+
+        return render(
+            request,
+            "create-review.html", {
+                "Create-review": ReviewForm()
+            })
