@@ -62,8 +62,8 @@
     {% if user == reviews.author %}
     <div class="container">
         <div class="col-md-4">
-            <button>Delete</button>
-            <button>Edit</button>
+            <a href="{% url 'delete_review' reviews.slug %}" class="btn">Delete</a>
+            <a href="{% url 'edit_review' reviews.slug %}" class="btn">Edit</a>
         </div>
     </div>
     {% endif%}
