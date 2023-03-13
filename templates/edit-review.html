@@ -21,7 +21,7 @@
                         </div>
                         {% else %}
                         {% if user.is_authenticated %}
-                            {% if user.id == reviews.author.id %}
+                            {% if user.id == review.author.id %}
                             <h3>
                                 Edit your review
                             </h3>
@@ -36,6 +36,7 @@
                                 <p>
                                     You are not the author of this Review, so you may not update it. Click <a href="{% url 'home' %}">here</a> to go back to the home page
                                 </p>
+                            {% endif %}
                         {% else %}
                             <div class="card-text">
                                 <p>You are signed out. Please <a href="{% url 'account_login' %}">sign in</a> to post a movie review</p>
