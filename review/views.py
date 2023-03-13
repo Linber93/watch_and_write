@@ -4,6 +4,7 @@ from django.views.generic.edit import FormView
 from django.views import generic, View
 from django.utils.text import slugify
 from django.urls import reverse, reverse_lazy
+from django.db.models import Q
 from .models import Review
 from .forms import CommentForm, ReviewForm
 
@@ -194,3 +195,42 @@ class DeleteReview(generic.DeleteView):
     template_name = 'delete-review.html'
     success_url = reverse_lazy('home')
 
+
+class SearchResults(generic.ListView):
+    """
+    The view for rendering the search results page.
+    assigned three variables that set the model, template and pagination
+    """
+    model = Review
+    template_name = 'search_results.html'
+    paginate_by = 3
+
+    def querystring(self):
+        """
+        querystring method
+        Required for retaining the same queryset across all pagination pages
+        """
+        querystring = self.request.GET.copy()
+        querystring.pop(self.page_kwarg, None)
+        encoded_querystring = querystring.urlencode()
+        return encoded_querystring
+
+    def get_queryset(self):
+        """
+        get_queryset method
+        Constructs a queryset using Q methods
+        Returns an object_list for use within the template
+        """
+        query = self.request.GET.get('search')
+
+        if query is not None:
+            object_list = Review.objects.filter(
+                Q(title__icontains=query) |
+                Q(author__username__icontains=query) |
+                Q(director__icontains=query) |
+                Q(actors__icontains=query)
+                ).filter(review_approved=True)
+        else:
+            object_list = Review.objects.none()
+
+        return object_list
