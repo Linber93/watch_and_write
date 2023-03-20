@@ -1,5 +1,8 @@
 body {
     height: 100vh;
+    max-width: 1300px;
+    margin: 0 auto;
+    font-family: 'Franklin Gothic Medium', sans-serif;
 }
 .container {
     margin: 0;
@@ -22,10 +25,6 @@ body {
     background-color: rgb(40, 40, 40);
 }
 
-.navbar-brand h1 {
-    font-family: 'Franklin Gothic Medium', sans-serif;
-}
-
 .nav-link {
     font-weight: bold;
     font-size: 1.1rem;
@@ -34,6 +33,10 @@ body {
 .nav-link:hover {
     color: goldenrod;
     text-decoration: underline;
+}
+
+.navbar-toggler {
+    background-color: goldenrod;
 }
 
 
@@ -45,9 +48,23 @@ body {
     background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(https://res.cloudinary.com/dqj8alsys/image/upload/v1678377459/pexels-ann-h-12616961_xbzxjc.jpg) center center / cover no-repeat;
 }
 
-.about-field {
-    background-color: aliceblue;
+
+.about-image {
+    max-width: 50%;
     border-radius: 8px;
+    height: 100%;
+}
+
+/* Carousel */
+
+.carousel-item {
+    background-color: rgba(238, 238, 238, 0.9);
+    text-decoration: none;
+    color:black
+}
+
+.carousel-controls {
+    background-color: black;
 }
 
 
@@ -62,7 +79,8 @@ body {
     position: absolute;
     top: 5%;
     min-width: 30%;
-    background-color: rgba(218, 165, 32, 0.819);
+    background-color: rgba(218, 165, 32, 0.9);
+    font-weight: bold;
 }
 
 
@@ -81,4 +99,5 @@ body {
 
 .footer{
     height: 60px;
+    max-width: 1300px;
 }
