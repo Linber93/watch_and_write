@@ -17,7 +17,8 @@
                     {% elif failure %}
                         <div class="alert alert-danger" role="alert">
                             <h2 class="text-center">Something went wrong!</h2>
-                            <p>Your review was NOT submitted. This is most likely due to the form not being filled out completely</p>
+                            <p>Your review was NOT submitted. This is most likely due to the form not being filled out
+                                completely or that you have already created a review for that movie</p>
                         </div>
                         {% else %}
                         {% if user.is_authenticated %}
