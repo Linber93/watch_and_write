@@ -31,7 +31,7 @@ class LandingPage(generic.ListView):
 
 class Review_Single(View):
     """
-    View for displaying information about a single NGO
+    View for displaying information about a single review
     """
     def get(self, request, slug, *args, **kwargs):
         """
@@ -159,7 +159,7 @@ class EditReview(generic.UpdateView):
     def form_valid(self, user_update_form):
         """
         Saves the updated review to the database
-        Then renders the update_review page with a custom context
+        Then renders the edit_review page with a custom context
         The context is used to display a success message
         """
         self.object = user_update_form.save()
@@ -172,8 +172,7 @@ class EditReview(generic.UpdateView):
 
     def form_invalid(self, user_update_form):
         """
-        Handles invalid forms, such as when alcohol content is <0
-        or when aroma, appearance, taste and aftertaste are <1 or >10
+        Handles invalid forms, such as if the user has already reviewed that movie of that the form wasn't filled in completely
         """
         template_name = self.template_name
         context = {
