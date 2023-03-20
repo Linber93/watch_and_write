@@ -21,5 +21,4 @@ class ReviewForm(forms.ModelForm):
             'opinion',
             'rating',
             'movie_poster',
-            'status',
         )
