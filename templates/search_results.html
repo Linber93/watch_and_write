@@ -4,102 +4,84 @@
 
 {% block content %}
 
-<div class="container-fluid">
+<div class="container justify-content-center background-directory w-auto g-0 mb-5">
     <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <div class="card">
-                <div class="card-inner-large">
-                    <h3>Search Results:</h3>
-                    {% for review in object_list %}
-                        <div class="card search-result-card">
-                            <a href="{% url 'single_review' review.slug %}" class="post-link search-result">
-                                <div class="row">
-                                    <div class="search-results-image d-none d-sm-inline col-5 col-lg-5 col-xl-4">
-                                        {% if "placeholder" in review.movie_poster.url %}
-                                            <img src="https://res.cloudinary.com/dqj8alsys/image/upload/v1678289064/defaultimage_nrxzoc.jpg" alt="Default image" aria-label="Default image">
-                                        {% else %}
-                                            <img src="{{ review.movie_poster.url }}" alt="an image of {{ review.title }}" aria-label="an image of {{ review.title }}">
-                                        {% endif %}
-                                    </div>
-                                    <div class="search-results-info col-7 col-lg-7 col-xl-4">
-                                        <h4 class="search-results-name">{{ review.title }}</h4>
-                                        <div class="search-results-text">
-                                            <div class="d-block mt-2">
-                                                <span>Author: {{ review.author }}</span>
-                                            </div>
-                                            <div class="d-block mt-2">
-                                                <span>{{ review.director }}</span>
-                                            </div>
-                                            <div class="d-block mt-2">
-                                                <span>Colour: {{ review.released_on }}</span>
-                                            </div>
-                                            <div class="d-block mt-2">
-                                                <span>Type: {{ review.excerpt }}</span>
-                                            </div>
-                                            </div>
-
-                                    </div>
-
-                                </div>
-                            </a>
-                        </div>
-                    {% empty %}
-                        <div class="card">
-                            <div class="card-inner">
-                                <p class="text-center">Your search returned no results</p>
-                                <p class="text-center">Click <a href="{% url 'home' %}">here</a> to go back to the homepage</p>
-                                <p class="text-center">Or try again</p>
-                            </div>
-                        </div>
-                    {% endfor %}
-
-                    <ul class="pagination justify-content-center mt-3">
-                        {% if page_obj.has_previous %}
-                            <li class="page-item">
-                                <a href="?page=1&amp;{{ view.querystring }}" class="page-link">&laquo; first</a>
-                            </li>
-                            <li class="page-item">
-                                <a href="?page={{ page_obj.previous_page_number }}&amp;{{ view.querystring }}" class="page-link">previous</a>
-                            </li>
-                        {% else %}
-                            <li class="page-item">
-                                <a href="#" class="page-link disabled">&laquo; first</a>
-                            </li>
-                            <li class="page-item">
-                                <a href="#" class="page-link disabled">previous</a>
-                            </li>
-                            
-                        {% endif %}
-
-                        {% for i in page_obj.paginator.page_range %}
-                            {% if page_obj.number == i %}
-                                <li class="page-item active"><a href="#" class="page-link">{{ i }}<span class="sr-only">(current)</span></a></li>
-                            {% else %}
-                                <li class="page-item"><a class="page-link" href="?page={{ i }}&amp;{{ view.querystring }}">{{ i }}</a></li>
-                            {% endif %}
-                        {% endfor %}
-                
-                        {% if page_obj.has_next %}
-                            <li class="page-item">
-                                <a href="?page={{ page_obj.next_page_number }}&amp;{{ view.querystring }}" class="page-link">next</a>
-                            </li>
-                            <li class="page-item">
-                                <a href="?page={{ page_obj.paginator.num_pages }}&amp;{{ view.querystring }}" class="page-link">last &raquo;</a>
-                            </li>
-                        {% else %}
-                            <li class="page-item">
-                                <a href="#" class="page-link disabled">next</a>
-                            </li>
-                            <li class="page-item">
-                                <a href="#" class="page-link disabled">last &raquo;</a>
-                            </li>
-                            
-                        {% endif %}
-                    </ul>
+        {% for review in object_list %}
+        <div class="card shadow-lg col-sm-10 col-lg-3 m-auto mt-5 mb-5 vh-75">
+            {% if "placeholder" in review.movie_poster.url %}
+            <div class="image-container" style="height: 350px;">
+            <img src="https://res.cloudinary.com/dqj8alsys/image/upload/v1678793974/defaultimage_kuoqah.jpg"
+                class="d-block w-100 mh-100 card-img-top" alt="Default Image" aria-label="Default Image" >
+                <div class="image-flash">
+                    <p class="author">Author: {{ review.author }}</p>
                 </div>
             </div>
+            {% else %}
+            <div style="height: 350px;" class="image-container">
+                <img src="{{ review.movie_poster.url }}" alt="An image of {{ review.title }} movie poster "
+                    class="d-block mh-100 card-img-top" alt="...">
+                <div class="image-flash">
+                    <p class="author">Author: {{ review.author }}</p>
+                </div>
+            </div>
+            {% endif %} <div class="card-body" style="height: 20rem;">
+                <h5 class="card-title">{{ review.title }}</h5>
+                <p class="card-text">{{ review.excerpt }}</p>
+                <a href="{% url 'single_review' review.slug %}" class="card-text btn btn-dark">More information</a>
+            </div>
         </div>
+        {% if forloop.counter|divisibleby:3 %}
     </div>
+        <div class="row card-container">
+            {% endif %}
+
+            {% endfor %}
+        </div>
+        <ul class="pagination justify-content-center mt-5 pb-5 mb-0">
+            {% if page_obj.has_previous %}
+                <li class="page-item m-1">
+                    <a href="#" class="page-link directory-pag-a">&laquo; first</a>
+                </li>
+                <li class="page-item m-1">
+                    <a href="#" class="page-link directory-pag-a">previous</a>
+                </li>
+            {% else %}
+                <li class="page-item m-1">
+                    <a href="#" class="page-link directory-pag-a">&laquo; first</a>
+                </li>
+                <li class="page-item m-1">
+                    <a href="#" class="page-link directory-pag-a">previous</a>
+                </li>
+                
+            {% endif %}
+        
+            {% for i in page_obj.paginator.page_range %}
+                {% if page_obj.number == i %}
+                    <li class="page-item m-1 active"><a href="#" class="page-link directory-pag-a">{{ i }}<span class="sr-only">(current)</span></a></li>
+                {% else %}
+                    <li class="page-item m-1"><a class="page-link directory-pag-a" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+        
+            {% if page_obj.has_next %}
+                <li class="page-item m-1">
+                    <a href="?page={{ page_obj.next_page_number }}" class="page-link directory-pag-a">next</a>
+                </li>
+                <li class="page-item m-1">
+                    <a href="?page={{ page_obj.paginator.num_pages }}" class="page-link directory-pag-a">last &raquo;</a>
+                </li>
+        
+            {% else %}
+                <li class="page-item m-1">
+                    <a href="#" class="page-link directory-pag-a">next</a>
+                </li>
+                <li class="page-item m-1">
+                    <a href="#" class="page-link directory-pag-a">last &raquo;</a>
+                </li>
+                
+            {% endif %}
+        </ul>
+        
 </div>
 
 {% endblock %}
