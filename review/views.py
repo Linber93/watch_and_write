@@ -107,7 +107,7 @@ class CreateReview(generic.CreateView):
             review = review_form.save(commit=False)
             review.email = request.user.email
             review.author = request.user
-            review.slug = review.title
+            review.slug = f'{review.title}_{review.author}'
             review.save()
 
             context = {
