@@ -3,7 +3,7 @@
 
 
 {% block content %}
-<div class="container background-directory vh-100">
+<div class="container background-directory justify-content-center w-auto mb-5">
     <div class="row">
         <div class="col-md-6 mt-3">
             <div class="card p-3">
@@ -18,7 +18,7 @@
                 <h6>Plot</h6>
                 <p>{{ reviews.plot }}</p>
                 <h6>Opinion</h6>
-                <p>{{ reviews.opinion}}</p>
+                <p>{{ reviews.opinion | safe }}</p>
                 <h6>Rating</h6>
                 {% if reviews.rating == 1 %}
                     <div>
@@ -41,6 +41,15 @@
                     <p>Disliked | Boring | Average | Decent | <strong>Great</strong></p>
                 </div>
                 {% endif%}
+                <!-- Shows "Edit" and "Delete" buttons if you created the review -->
+                {% if user == reviews.author %}
+                <div class="container">
+                    <div class="col-md-6 mt-2">
+                        <a href="{% url 'delete_review' reviews.slug %}" class="btn btn-danger">Delete</a>
+                        <a href="{% url 'edit_review' reviews.slug %}" class="btn btn-primary">Edit</a>
+                    </div>
+                </div>
+                {% endif%}
             </div>
         </div>
         <div class="col-md-6 mt-3">
@@ -59,15 +68,7 @@
             </div>
         </div>
     </div>
-    <!-- Shows "Edit" and "Delete" buttons if you created the review -->
-    {% if user == reviews.author %}
-    <div class="container">
-        <div class="col-md-4">
-            <a href="{% url 'delete_review' reviews.slug %}" class="btn">Delete</a>
-            <a href="{% url 'edit_review' reviews.slug %}" class="btn">Edit</a>
-        </div>
-    </div>
-    {% endif%}
+    
 
         <div class="row d-flex justify-content-between">
             <div class="col-md-6 mb-4  mt-3 border-0">
