@@ -21,21 +21,21 @@
                 <p>{{ reviews.opinion | safe }}</p>
                 <h6>Rating</h6>
                 {% if reviews.rating == 1 %}
-                    <div>
-                        <strong>Disliked</strong> | Boring | Average | Decent | Great
-                    </div>
+                <div>
+                    <strong>Disliked</strong> | Boring | Average | Decent | Great
+                </div>
                 {% elif reviews.rating == 2 %}
-                    <div>
-                        Disliked | <strong>Boring</strong> | Average | Decent | Great
-                    </div>
+                <div>
+                    Disliked | <strong>Boring</strong> | Average | Decent | Great
+                </div>
                 {% elif reviews.rating == 3 %}
-                    <div>
-                        <p>Disliked | Boring | <strong>Average</strong> | Decent | Great</p>
-                    </div>
+                <div>
+                    <p>Disliked | Boring | <strong>Average</strong> | Decent | Great</p>
+                </div>
                 {% elif review.rating == 4 %}
-                    <div>
-                        <p>Disliked | Boring | Average | <strong>Decent</strong> | Great</p>
-                    </div>
+                <div>
+                    <p>Disliked | Boring | Average | <strong>Decent</strong> | Great</p>
+                </div>
                 {% else%}
                 <div>
                     <p>Disliked | Boring | Average | Decent | <strong>Great</strong></p>
@@ -54,66 +54,64 @@
         </div>
         <div class="col-md-6 mt-3">
             <div class="card">
-            {% if "placeholder" in reviews.movie_poster.url %}
+                {% if "placeholder" in reviews.movie_poster.url %}
                 <div class="image-container" style="height: 350px;">
-                    <img src="https://res.cloudinary.com/dqj8alsys/image/upload/v1678793974/defaultimage_kuoqah.jpg"
-                        class="d-block w-100 mh-100 card-img-top" alt="Default Image" aria-label="Default Image">
+                    <img src="https://res.cloudinary.com/dqj8alsys/image/upload/v1678793974/defaultimage_kuoqah.jpg" class="d-block w-100 mh-100 card-img-top" alt="Default Image" aria-label="Default Image">
                 </div>
-            {% else %}
+                {% else %}
                 <div style="height: 350px;" class="image-container">
-                    <img src="{{ reviews.movie_poster.url }}" alt="An image of {{ review.title }} movie poster "
-                        class="d-block mh-100 card-img-top" alt="...">
+                    <img src="{{ reviews.movie_poster.url }}" alt="An image of {{ review.title }} movie poster " class="d-block mh-100 card-img-top" alt="...">
                 </div>
-            {% endif %}
+                {% endif %}
             </div>
         </div>
     </div>
-    
 
-        <div class="row d-flex justify-content-between">
-            <div class="col-md-6 mb-4  mt-3 border-0">
-                    <div class="card card-body border-0">
-                        {% if commented %}
-                        <div class="alert alert-success" role="alert">
-                            Your comment is awaiting approval
-                        </div>
-                        {% else %}
-                        {% if user.is_authenticated %}
-                        <h3>Leave a comment:</h3>
-                        <p>Posting as: {{ user.username }}</p>
-                        <form method="post" style="margin-top: 1.3em;">
-                            {{ comment_form | crispy }}
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-signup btn-lg">Submit</button>
-                        </form>
-                        {% else %}
-                        <p> To submit a comment please <a href="{% url 'account_login' %}">Sign in</a>.</p>
-                        {% endif %}
-                        {% endif %}
-                    </div>
+
+    <div class="row d-flex justify-content-between">
+        <div class="col-md-6 mb-4  mt-3 border-0">
+            <div class="card card-body border-0">
+                {% if commented %}
+                <div class="alert alert-success" role="alert">
+                    Your comment is awaiting approval
                 </div>
-                <div class="col-md-6 mb-4 mt-3 border-0">
-                    <div class="card card-body border-0">
-                        <h3>Comments:</h3>
-                        <!-- We want a for loop inside the empty control tags to iterate through each comment in comments -->
-                        {% for comment in comments %}
-                        <div class="comments" style="padding: 10px;">
-                            <p class="font-weight-bold">
-                                <!-- The commenter's name goes here. Check the model if you're not sure what that is -->
-                                {{ comment.name }}
-                                <span class=" text-muted font-weight-normal">
-                                    <!-- The comment's created date goes here -->
-                                    {{ comment.created_on }}
-                                </span> wrote:
-                            </p>
-                            <!-- The body of the comment goes before the | -->
-                            {{ comment.body | linebreaks }}
-                        </div>
-                        <!-- Our for loop ends here -->
-                        {% endfor %}
-                    </div>
-                </div>
+                {% else %}
+                {% if user.is_authenticated %}
+                <h3>Leave a comment:</h3>
+                <p>Posting as: {{ user.username }}</p>
+                <form method="post" style="margin-top: 1.3em;">
+                    {{ comment_form | crispy }}
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-signup btn-lg">Submit</button>
+                </form>
+                {% else %}
+                <p> To submit a comment please <a href="{% url 'account_login' %}">Sign in</a>.</p>
+                {% endif %}
+                {% endif %}
             </div>
-
+        </div>
+        <div class="col-md-6 mb-4 mt-3 border-0">
+            <div class="card card-body border-0">
+                <h3>Comments:</h3>
+                <!-- We want a for loop inside the empty control tags to iterate through each comment in comments -->
+                {% for comment in comments %}
+                <div class="comments" style="padding: 10px;">
+                    <p class="font-weight-bold">
+                        <!-- The commenter's name goes here. Check the model if you're not sure what that is -->
+                        {{ comment.name }}
+                        <span class=" text-muted font-weight-normal">
+                            <!-- The comment's created date goes here -->
+                            {{ comment.created_on }}
+                        </span> wrote:
+                    </p>
+                    <!-- The body of the comment goes before the | -->
+                    {{ comment.body | linebreaks }}
+                </div>
+                <!-- Our for loop ends here -->
+                {% endfor %}
+            </div>
+        </div>
     </div>
+
+</div>
 {% endblock %}

@@ -7,16 +7,14 @@
         <div class="card shadow-lg col-sm-10 col-lg-3 m-auto mt-5 mb-5 vh-75">
             {% if "placeholder" in review.movie_poster.url %}
             <div class="image-container" style="height: 350px;">
-            <img src="https://res.cloudinary.com/dqj8alsys/image/upload/v1678793974/defaultimage_kuoqah.jpg"
-                class="d-block w-100 mh-100 card-img-top" alt="Default Image" aria-label="Default Image" >
+                <img src="https://res.cloudinary.com/dqj8alsys/image/upload/v1678793974/defaultimage_kuoqah.jpg" class="d-block w-100 mh-100 card-img-top" alt="Default Image" aria-label="Default Image">
                 <div class="image-flash">
                     <p class="author">Author: {{ review.author }}</p>
                 </div>
             </div>
             {% else %}
             <div style="height: 350px;" class="image-container">
-                <img src="{{ review.movie_poster.url }}" alt="An image of {{ review.title }} movie poster "
-                    class="d-block mh-100 card-img-top">
+                <img src="{{ review.movie_poster.url }}" alt="An image of {{ review.title }} movie poster " class="d-block mh-100 card-img-top">
                 <div class="image-flash">
                     <p class="author">Author: {{ review.author }}</p>
                 </div>
@@ -29,62 +27,62 @@
         </div>
         {% if forloop.counter|divisibleby:3 %}
     </div>
-        <div class="row card-container">
-            {% endif %}
+    <div class="row card-container">
+        {% endif %}
         {% empty %}
         <div class="card border-secondary mb-3" style="max-width: 18rem;">
             <div class="card-header">Bummer</div>
             <div class="card-body text-secondary">
-              <p class="card-text">It seems like there is no reviews yet. <a href="{% url 'account_login' %}">Sign in</a> to create one of your own</p>
+                <p class="card-text">It seems like there is no reviews yet. <a href="{% url 'account_login' %}">Sign in</a> to create one of your own</p>
             </div>
-        {% endfor %}
+            {% endfor %}
         </div>
         <ul class="pagination justify-content-center mt-5 pb-5 mb-0">
             {% if page_obj.has_previous %}
-                <li class="page-item m-1">
-                    <a href="#" class="page-link directory-pag-a">&laquo; first</a>
-                </li>
-                <li class="page-item m-1">
-                    <a href="#" class="page-link directory-pag-a">previous</a>
-                </li>
+            <li class="page-item m-1">
+                <a href="#" class="page-link directory-pag-a">&laquo; first</a>
+            </li>
+            <li class="page-item m-1">
+                <a href="#" class="page-link directory-pag-a">previous</a>
+            </li>
             {% else %}
-                <li class="page-item m-1">
-                    <a href="#" class="page-link directory-pag-a">&laquo; first</a>
-                </li>
-                <li class="page-item m-1">
-                    <a href="#" class="page-link directory-pag-a">previous</a>
-                </li>
-                
+            <li class="page-item m-1">
+                <a href="#" class="page-link directory-pag-a">&laquo; first</a>
+            </li>
+            <li class="page-item m-1">
+                <a href="#" class="page-link directory-pag-a">previous</a>
+            </li>
+
             {% endif %}
-        
+
             {% for i in page_obj.paginator.page_range %}
-                {% if page_obj.number == i %}
-                    <li class="page-item m-1 active"><a href="#" class="page-link directory-pag-a">{{ i }}<span class="sr-only">(current)</span></a></li>
-                {% else %}
-                    <li class="page-item m-1"><a class="page-link directory-pag-a" href="?page={{ i }}">{{ i }}</a></li>
-                {% endif %}
-            {% endfor %}
-        
-            {% if page_obj.has_next %}
-                <li class="page-item m-1">
-                    <a href="?page={{ page_obj.next_page_number }}" class="page-link directory-pag-a">next</a>
-                </li>
-                <li class="page-item m-1">
-                    <a href="?page={{ page_obj.paginator.num_pages }}" class="page-link directory-pag-a">last &raquo;</a>
-                </li>
-        
+            {% if page_obj.number == i %}
+            <li class="page-item m-1 active"><a href="#" class="page-link directory-pag-a">{{ i }}<span class="sr-only">(current)</span></a></li>
             {% else %}
-                <li class="page-item m-1">
-                    <a href="#" class="page-link directory-pag-a">next</a>
-                </li>
-                <li class="page-item m-1">
-                    <a href="#" class="page-link directory-pag-a">last &raquo;</a>
-                </li>
-                
+            <li class="page-item m-1"><a class="page-link directory-pag-a" href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+            <li class="page-item m-1">
+                <a href="?page={{ page_obj.next_page_number }}" class="page-link directory-pag-a">next</a>
+            </li>
+            <li class="page-item m-1">
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="page-link directory-pag-a">last &raquo;</a>
+            </li>
+
+            {% else %}
+            <li class="page-item m-1">
+                <a href="#" class="page-link directory-pag-a">next</a>
+            </li>
+            <li class="page-item m-1">
+                <a href="#" class="page-link directory-pag-a">last &raquo;</a>
+            </li>
+
             {% endif %}
         </ul>
-        
-</div>
+
+    </div>
 
 
 

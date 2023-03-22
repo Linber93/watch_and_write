@@ -8,40 +8,40 @@
             <div class="card mt-3 mb-3">
                 <div class="card-body">
                     {% if updated %}
-                        <div class="alert alert-success" role="alert">
-                            <h2 class="text-center">Success!</h2>
-                            <p>Your review has been succesfully updaed is awaiting re-approval</p>
-                            <p>Click <a href="{% url 'home' %}">here</a> to go back to the home page</p>
-                        </div>
+                    <div class="alert alert-success" role="alert">
+                        <h2 class="text-center">Success!</h2>
+                        <p>Your review has been succesfully updaed is awaiting re-approval</p>
+                        <p>Click <a href="{% url 'home' %}">here</a> to go back to the home page</p>
+                    </div>
                     {% elif failure %}
-                        <div class="alert alert-danger" role="alert">
-                            <h2 class="text-center">Something went wrong!</h2>
-                            <p>Your review was NOT submitted. This is most likely due to the form not being filled out completely</p>
-                            <p>Click <a href="{% url 'home' %}">here</a> to go back to the home page</p>
-                        </div>
-                        {% else %}
-                        {% if user.is_authenticated %}
-                            {% if user.id == review.author.id %}
-                            <h3>
-                                Edit your review
-                            </h3>
-                            <form method="POST" style="margin-top: 1.3em;" enctype="multipart/form-data">
-                                {{ form.media|safe }}
-                                {{ form.as_p }}
-                                
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-signup btn-lg">Update</button>
-                            </form>
-                            {% else %}
-                                <p>
-                                    You are not the author of this Review, so you may not update it. Click <a href="{% url 'home' %}">here</a> to go back to the home page
-                                </p>
-                            {% endif %}
-                        {% else %}
-                            <div class="card-text">
-                                <p>You are signed out. Please <a href="{% url 'account_login' %}">sign in</a> to post a movie review</p>
-                            </div>
-                        {% endif %}
+                    <div class="alert alert-danger" role="alert">
+                        <h2 class="text-center">Something went wrong!</h2>
+                        <p>Your review was NOT submitted. This is most likely due to the form not being filled out completely</p>
+                        <p>Click <a href="{% url 'home' %}">here</a> to go back to the home page</p>
+                    </div>
+                    {% else %}
+                    {% if user.is_authenticated %}
+                    {% if user.id == review.author.id %}
+                    <h3>
+                        Edit your review
+                    </h3>
+                    <form method="POST" style="margin-top: 1.3em;" enctype="multipart/form-data">
+                        {{ form.media|safe }}
+                        {{ form.as_p }}
+
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-signup btn-lg">Update</button>
+                    </form>
+                    {% else %}
+                    <p>
+                        You are not the author of this Review, so you may not update it. Click <a href="{% url 'home' %}">here</a> to go back to the home page
+                    </p>
+                    {% endif %}
+                    {% else %}
+                    <div class="card-text">
+                        <p>You are signed out. Please <a href="{% url 'account_login' %}">sign in</a> to post a movie review</p>
+                    </div>
+                    {% endif %}
                     {% endif %}
                 </div>
             </div>
