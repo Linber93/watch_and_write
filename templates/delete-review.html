@@ -8,6 +8,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="card-inner">
+                        <!-- Deletion warning text -->
                         {% if user.is_authenticated %}
                         {% if user.id == review.author.id %}
                         <h3>
@@ -36,6 +37,7 @@
         </div>
     </div>
 </div>
+<!-- Final deletion confirmation -->
 <div class="modal" tabindex="-1" id="delete">
     <div class="modal-dialog">
         <div class="modal-content">
