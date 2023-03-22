@@ -14,7 +14,7 @@ class Review(models.Model):
     created_on = models.DateTimeField(auto_now=True)
     director = models.CharField(max_length=100)
     actors = models.CharField(max_length=300)
-    released_on = models.DateTimeField()
+    released_on = models.DateField()
     excerpt = models.TextField(blank=True)
     plot = models.TextField()
     opinion = models.TextField()
