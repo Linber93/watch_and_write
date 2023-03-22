@@ -1,4 +1,5 @@
 {% load static %}
+{% load active_link_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,29 +29,31 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link text-goldenrod" aria-current="page" href="{% url 'home' %}">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-goldenrod" href="{% url 'directory' %}">Directory</a>
-              </li>
-              {% if user.is_authenticated %}
-              <li class="nav-item">
-                <a class="nav-link text-goldenrod" href="{% url 'create_review' %}">Create Review</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link text-goldenrod" href="{% url 'account_logout' %}">Logout</a>
-              </li>
-              {% else %}
-              <li class="nav-item">
-                  <a class="nav-link text-goldenrod" href="{% url 'account_signup' %}">Register</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link text-goldenrod" href="{% url 'account_login' %}">Login</a>
-              </li>
-              {% endif %}
-            </ul>
+            {% with url_name=request.resolver_match.url_name %}
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link text-goldenrod {% if url_name == 'home' %} active-link{% endif %}" aria-current="page" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-goldenrod {% if url_name == 'directory' %} active-link{% endif %}" href="{% url 'directory' %}">Directory</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link text-goldenrod {% if url_name == 'create_review' %} active-link{% endif %}" href="{% url 'create_review' %}">Create Review</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-goldenrod {% if url_name == 'account_logout' %} active-link{% endif %}" href="{% url 'account_logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link text-goldenrod {% if url_name == 'account_signup' %} active-link{% endif %}" href="{% url 'account_signup' %}">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-goldenrod {% if url_name == 'account_login' %} active-link{% endif %}" href="{% url 'account_login' %}">Login</a>
+                </li>
+                {% endif %}
+              </ul>
+              {% endwith %}
             <form class="d-flex mb-3" role="search" action="{% url 'search_results' %}" method="GET">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
               <button class="btn btn-warning" type="submit">Search</button>
@@ -71,7 +74,6 @@
           © 2023 Copyright: Watch & Write
         </div>
       </div>
-
     </footer>
 
 

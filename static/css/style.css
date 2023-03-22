@@ -31,8 +31,12 @@ body {
 }
 
 .nav-link:hover {
-    color: goldenrod;
+    color: white;
     text-decoration: underline;
+}
+
+.active-link {
+    color: white;
 }
 
 .navbar-toggler {
