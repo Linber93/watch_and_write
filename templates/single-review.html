@@ -13,8 +13,8 @@
                 <p>{{ reviews.director }}</p>
                 <h5>Actors: </h5>
                 <p>{{ reviews.actors }}</p>
-                <h6>Released on: </h6>
-                <p>{{ reviews.released_on }}</p>
+                <h6>Release year: </h6>
+                <p>{{ reviews.released_on|date:"Y" }}</p>
                 <h6>Plot</h6>
                 <p>{{ reviews.plot }}</p>
                 <h6>Opinion</h6>
