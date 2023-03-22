@@ -4,11 +4,12 @@ body {
     margin: 0 auto;
     font-family: 'Franklin Gothic Medium', sans-serif;
 }
+
 .container {
     margin: 0;
 }
 
-.row{
+.row {
     width: 90%;
     margin: 0 auto;
 }
@@ -17,7 +18,7 @@ body {
     color: goldenrod;
 }
 
-/* Navbar*/ 
+/* Navbar*/
 .navbar {
     --bs-navbar-padding-y: 0;
     font-family: 'Montserrat', sans-serif;
@@ -64,7 +65,7 @@ body {
 .carousel-item {
     background-color: rgba(238, 238, 238, 0.9);
     text-decoration: none;
-    color:black
+    color: black
 }
 
 .carousel-controls {
@@ -88,9 +89,8 @@ body {
 }
 
 img {
-    object-fit:cover
+    object-fit: cover
 }
-
 
 
 
@@ -105,7 +105,7 @@ img {
 
 /* Footer*/
 
-.footer{
+.footer {
     height: 60px;
     max-width: 1300px;
 }
