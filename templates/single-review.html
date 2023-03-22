@@ -86,6 +86,8 @@
                             {% csrf_token %}
                             <button type="submit" class="btn btn-signup btn-lg">Submit</button>
                         </form>
+                        {% else %}
+                        <p> To submit a comment please <a href="{% url 'account_login' %}">Sign in</a>.</p>
                         {% endif %}
                         {% endif %}
                     </div>
