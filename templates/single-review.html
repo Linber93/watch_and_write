@@ -60,14 +60,12 @@
                 </div>
                 {% else %}
                 <div style="height: 350px;" class="image-container">
-                    <img src="{{ reviews.movie_poster.url }}" alt="An image of {{ review.title }} movie poster " class="d-block mh-100 card-img-top" alt="...">
+                    <img src="{{ reviews.movie_poster.url }}" alt="An image of {{ review.title }} movie poster " class="d-block mh-100 card-img-top">
                 </div>
                 {% endif %}
             </div>
         </div>
     </div>
-
-
     <div class="row d-flex justify-content-between">
         <div class="col-md-6 mb-4  mt-3 border-0">
             <div class="card card-body border-0">
@@ -112,6 +110,5 @@
             </div>
         </div>
     </div>
-
 </div>
 {% endblock %}
