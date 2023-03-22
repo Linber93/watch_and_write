@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, get_object_or_404
 from django.views.generic.edit import FormView
 from django.views import generic, View
@@ -29,7 +29,7 @@ class LandingPage(generic.ListView):
     queryset = Review.objects.filter(review_approved=True).order_by('created_on')
 
 
-class Review_Single(View):
+class ReviewSingle(View):
     """
     View for displaying information about a single review
     """
@@ -56,6 +56,8 @@ class Review_Single(View):
         )
 
     def post(self, request, slug, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect(reverse('login'))
 
         queryset = Review.objects.filter(status=1)
         reviews = get_object_or_404(queryset, slug=slug)
@@ -93,7 +95,7 @@ class Review_Single(View):
         )
 
 
-class CreateReview(generic.CreateView):
+class CreateReview(generic.CreateView, LoginRequiredMixin):
     """
     View to Create a review
     """
@@ -124,7 +126,7 @@ class CreateReview(generic.CreateView):
         return render(request, self.template_name, context)
 
 
-class EditReview(generic.UpdateView):
+class EditReview(generic.UpdateView, LoginRequiredMixin, UserPassesTestMixin):
     """
     View to Edit a review
     """
@@ -183,7 +185,7 @@ class EditReview(generic.UpdateView):
         return render(self.request, template_name, context)
 
 
-class DeleteReview(generic.DeleteView):
+class DeleteReview(generic.DeleteView, LoginRequiredMixin, UserPassesTestMixin):
     """
     The view used for deleting a review on the front-end
     Does not use a get or post method
