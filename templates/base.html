@@ -10,10 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
     </script>
     <title>Watch and Write</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -24,43 +22,45 @@
     <!-- Navigation -->
     <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="{% url 'home' %}"><h2 class="text-goldenrod">Watch & Write</h2></a>
-          <button class="navbar-toggler text-goldenrod" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            {% with url_name=request.resolver_match.url_name %}
-              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <a class="nav-link text-goldenrod {% if url_name == 'home' %} active-link{% endif %}" aria-current="page" href="{% url 'home' %}">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link text-goldenrod {% if url_name == 'directory' %} active-link{% endif %}" href="{% url 'directory' %}">Directory</a>
-                </li>
-                {% if user.is_authenticated %}
-                <li class="nav-item">
-                  <a class="nav-link text-goldenrod {% if url_name == 'create_review' %} active-link{% endif %}" href="{% url 'create_review' %}">Create Review</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-goldenrod {% if url_name == 'account_logout' %} active-link{% endif %}" href="{% url 'account_logout' %}">Logout</a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link text-goldenrod {% if url_name == 'account_signup' %} active-link{% endif %}" href="{% url 'account_signup' %}">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-goldenrod {% if url_name == 'account_login' %} active-link{% endif %}" href="{% url 'account_login' %}">Login</a>
-                </li>
-                {% endif %}
-              </ul>
-              {% endwith %}
-            <form class="d-flex mb-3" role="search" action="{% url 'search_results' %}" method="GET">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
-              <button class="btn btn-warning" type="submit">Search</button>
-            </form>
-          </div>
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <h2 class="text-goldenrod">Watch & Write</h2>
+            </a>
+            <button class="navbar-toggler text-goldenrod" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                {% with url_name=request.resolver_match.url_name %}
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link text-goldenrod {% if url_name == 'home' %} active-link{% endif %}" aria-current="page" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-goldenrod {% if url_name == 'directory' %} active-link{% endif %}" href="{% url 'directory' %}">Directory</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link text-goldenrod {% if url_name == 'create_review' %} active-link{% endif %}" href="{% url 'create_review' %}">Create Review</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-goldenrod {% if url_name == 'account_logout' %} active-link{% endif %}" href="{% url 'account_logout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link text-goldenrod {% if url_name == 'account_signup' %} active-link{% endif %}" href="{% url 'account_signup' %}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-goldenrod {% if url_name == 'account_login' %} active-link{% endif %}" href="{% url 'account_login' %}">Login</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                {% endwith %}
+                <form class="d-flex mb-3" role="search" action="{% url 'search_results' %}" method="GET">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                    <button class="btn btn-warning" type="submit">Search</button>
+                </form>
+            </div>
         </div>
-      </nav>
+    </nav>
 
     <main class="flex-shrink-0 main-bg">
         {% block content %}
@@ -69,11 +69,11 @@
     </main>
 
     <footer>
-      <div class="container-fluid footer bg-dark fixed-bottom">
-        <div class="text-goldenrod p-3 d-flex justify-content-end">
-          © 2023 Copyright: Watch & Write
+        <div class="container-fluid footer bg-dark fixed-bottom">
+            <div class="text-goldenrod p-3 d-flex justify-content-end">
+                © 2023 Copyright: Watch & Write
+            </div>
         </div>
-      </div>
     </footer>
 
 
