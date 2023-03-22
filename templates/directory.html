@@ -31,6 +31,12 @@
     </div>
         <div class="row card-container">
             {% endif %}
+        {% empty %}
+        <div class="card border-secondary mb-3" style="max-width: 18rem;">
+            <div class="card-header">Bummer</div>
+            <div class="card-body text-secondary">
+              <p class="card-text">It seems like there is no reviews yet. <a href="{% url 'account_login' %}">Sign in</a> to create one of your own</p>
+            </div>
         {% endfor %}
         </div>
         <ul class="pagination justify-content-center mt-5 pb-5 mb-0">

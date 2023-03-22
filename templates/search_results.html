@@ -34,7 +34,12 @@
     </div>
         <div class="row card-container">
             {% endif %}
-
+            {% empty %}
+            <div class="card border-secondary mb-3" style="max-width: 18rem;">
+                <div class="card-header">Hmmm...</div>
+                <div class="card-body text-secondary">
+                  <p class="card-text">Sadly it seems like I couldn't find what you were looking for. Please try again</p>
+                </div>
             {% endfor %}
         </div>
         <ul class="pagination justify-content-center mt-5 pb-5 mb-0">
