@@ -87,6 +87,10 @@ body {
     font-weight: bold;
 }
 
+img {
+    object-fit:cover
+}
+
 
 
 
