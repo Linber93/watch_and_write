@@ -315,6 +315,91 @@ You will also need a Cloudinary account to store and serve images and static fil
 
 If developing a clone of Watch & Write locally, you will need an `env.py` file to contain the local environment variables. These would be the CLOUDINARY_URL, SECRET_KEY, and DATABASE_URL. The CLOUDINARY_URL can be obtained from your Cloudinary account, whilst the DATABASE_URL is provided by Heroku when a postgres database is attached to the Heroku app. The SECRET_KEY is a password of your own making. These will need to be added to your Heroku app Config Vars in the settings tab.
 
+# **Testing**
+
+I defaulted to do manual testing due to time restraints
+
+## **Generic User Tests**
+
+| Test               | Action                                    | expected result                                                               | Result                       |
+| -------------------|-------------------------------------------|-------------------------------------------------------------------------------|------------------------------|
+| Carousel suffle    | Load the homepage                         | The carousel properly suffles between the 3 most recent reviews               | PASSED                       |
+| load directory     | Press the "directory" link in navbar      | Load all reviews in sets of 6 with the rest paginated                         | PASSED                       |
+| Navigate directory | Press pagination buttons at the bottom    | Loads a new set of 6 reviews                                                  | FAILED(noted in bug section) |
+| Open single review | Press "more information" on a review      | Open the Single review template with the selected reviews information         | PASSED                       |
+| test searchbar     | Search for "linber93"                     | loads a results page with "linber93" as the author, director, actor or title  | PASSED                       |
+
+## **Registered User Tests**
+
+| Test               | Action                                    | expected result                                                               | Result                       |
+| -------------------|-------------------------------------------|-------------------------------------------------------------------------------|------------------------------|
+| Register account   | Press register and fill out form          | An account will be created and logged in to using those credentials           | PASSED                       |
+| Login account      | Press login with credentials              | The user will be logged in an given full access to the application            | PASSED                       |
+| Comment review     | open a review and fill the comment form in| A success message should appear awaiting approval from admin                  | PASSED                       |
+| Create Review      | Press "Create review" on a the navbar     | A success message should appear awaiting approval from admin                  | PASSED                       |
+
+## **Review Owner Tests**
+
+| Test               | Action                                    | expected result                                                               | Result                       |
+| -------------------|-------------------------------------------|-------------------------------------------------------------------------------|------------------------------|
+| Edit review        | Go to review you created and press Edit   | A prepopulated form should appear and allow the user to change the content    | PASSED                       |
+| Delete review      | Go to review you created and press delete | A warning message with a final confirmation that you want to delete it        | PASSED                       |
+
+# **Validator testing**
+
+- HTML - Validated using the official W3C Markup Validator. [W3C validator](https://validator.w3.org/)
+
+- CSS - validated using the official W3C Jigsaw CSS validation Service. [W3C CSS validator](https://jigsaw.w3.org/css-validator/)
+
+- JavaScript - Validated using jshint [jshint.com](https://jshint.com/)
+
+### Lighthouse
+
+The site has been tested using Lighthouse in Chrome developer tool
+
+
+### Browser compatibility
+- Tested on Microsoft Edge Version 108.0.1462.54 on Windows 10 Home 21H2.
+- Tested on Google Chrome Version 108.0.5359.125 on Windows 10 Home 21H2.
+- Tested on Firefox Version 108.0.1 on Windows 10 Home 21H2.
+- Tested on Safari Version 16.2 on macOS Venture.
+
+## Deployment
+
+- The site was deployed to Herokue. The steps to deploy are as follows: 
+  1. In the heroku dashboard, navigate to the app 
+  2. Navigate to the deploy tab
+  3. Connect to you github and find the repo for the project
+  4. select "main" as the branch and then press the deploy branch button and wait for the app to be deployed 
+
+
+ [View deployed site here](https://watch-and-write.herokuapp.com/)
+
+## External technologies used
+ - [MDN](https://developer.mozilla.org/en-US/) - external resource to learn more about
+ - [Djangoproject](https://docs.djangoproject.com/en/4.1/) - external resource to learn more about the django framework
+ - [Gitpod](https://www.gitpod.io/) - The developer used Gitpod to develop this site.
+ - [Github](https://github.com/) - used to store and save my project during the development process.
+ - Heroku - Used to host the website
+ - HTML5 - Mark-up language using semantic structure
+ - bootstrap - Used to help with styling and overall layout
+ - CCS3 - Cascading style sheets used to style.
+ - Django Framework.
+ - Python.
+
+ ## Credits
+### Content
+ - Content was created and assessed by Linus Berger.
+
+### Acknowledgements
+ - I received some ideas on design and how to clean up my code from friends and relatives
+ - My friend Adam Boley for assistance with bugfixes, smart sollutions to problems that arrised during development and allowing me to use his code where it would be applicable on my project
+ - My Mentor Brian Macharia for guiding me through this project and giving valuable tips and advice throughout the development process.
+
+
+
+
+
 
 
 
