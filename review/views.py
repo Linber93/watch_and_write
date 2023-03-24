@@ -184,6 +184,13 @@ class EditReview(generic.UpdateView, LoginRequiredMixin, UserPassesTestMixin):
         }
         return render(self.request, template_name, context)
 
+    def test_func(self):
+        """Test that logged in user is post author"""
+        post = self.get_object()
+        if self.request.user == review.author:
+            return True
+        return False
+
 
 class DeleteReview(generic.DeleteView, LoginRequiredMixin, UserPassesTestMixin):
     """
@@ -195,6 +202,13 @@ class DeleteReview(generic.DeleteView, LoginRequiredMixin, UserPassesTestMixin):
     model = Review
     template_name = 'delete-review.html'
     success_url = reverse_lazy('home')
+
+    def test_func(self):
+        """Test that logged in user is post author"""
+        post = self.get_object()
+        if self.request.user == review.author:
+            return True
+        return False
 
 
 class SearchResults(generic.ListView):
