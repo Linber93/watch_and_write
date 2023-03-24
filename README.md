@@ -74,6 +74,15 @@ These user stories were not implemented due to the features were do difficult to
     - As a user can change the password for that account, so that it becomes more memorable
     - As a user i can upvote comments, so that I can show my approval of comments I agree with
 
+# **Wireframes**
+The Project with the base of the directory and the landing page. the rest of the project developed around those resulting in very few wireframes included below.
+
+![](documentation/screenshots/wf_landing_dt_pp4.PNG)
+
+![](documentation/screenshots/wf_landing_pp4.png)
+
+![](documentation/screenshots/wf_directory_pp4.png)
+
 # **Features**
 
 This section covers the features, pages, views and forms of the project explaining some of the design choices.
@@ -90,7 +99,11 @@ If the user is not signed in links to the signup page or login page will also be
 
 On smaller devices the navbar will instead be a collapsible navbar that will drop down on request.
 
+navbar on desktop:
 ![](documentation/screenshots/navbar_pp4.png)
+
+navbar on mobile:
+
 ![](documentation/screenshots/navbar_pp4m.png)
 
 
